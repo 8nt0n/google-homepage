@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <!--set page title-->
+    <title>Google</title>
+    <!--link external css file-->
+    <link rel="stylesheet" href="style.css">
+
+    <!--Import google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1 class="logo">Google</h1>
+
+    <form id="searchForm" action="https://www.google.com/search" class="Search-bar-container" method="GET">
+        <input type="text" placeholder="Search" name="q" class="Search-bar" id="main">
+        
+        <button type="submit" class="Search-button"></button>
+    </form>
+
+    <button class="alt-search-button" onclick="searchUpdate('Image Search', 1)" id="Button1">Image Search</button>
+    <button class="alt-search-button" onclick="searchUpdate('Advanced Search', 2)" id="Button2">Advanced Search</button>
+
+</body>
+
+<script>
+    let searchType = "Search";
+    
+    // Main elements on the screen
+    let pathMain = document.getElementById("main");
+    let searchForm = document.getElementById("searchForm");
+
+    function searchUpdate(content, identifier) {
+        // Update search bar and form based on button clicked
+        if (content === "Image Search") {
+            pathMain.placeholder = "Search for images";
+            searchForm.action = "https://www.google.com/images";
+            updateButtonContent(document.getElementById("Button" + identifier), "Search");
+            searchType = "Image Search";
+            return 0;
+        }
+
+        if (content === "Advanced Search") {
+            pathMain.placeholder = "Advanced search";
+            searchForm.action = "https://www.google.com/advanced_search";
+            updateButtonContent(document.getElementById("Button" + identifier), "Search");
+            searchType = "Advanced Search";
+            return 0;
+        }
+
+        // Default search
+        if (content === "Search") {
+            pathMain.placeholder = "Search";
+            searchForm.action = "https://www.google.com/search";
+            updateButtonContent(document.getElementById("Button" + identifier), searchType);
+            searchType = "Search";
+            return 0;
+        }
+
+        console.log("Invalid content argument in searchUpdate() | content: " + content);
+        return -1;
+    }
+
+    function updateButtonContent(buttonPath, newContent) {
+        buttonPath.innerHTML = newContent;
+    }
+</script>
+
+</html>
